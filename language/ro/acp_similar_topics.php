@@ -9,6 +9,9 @@
 *
 */
 
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -51,6 +54,8 @@ $lang = array_merge($lang, array(
 	'PST_DAYS'			=> 'Zile',
 	'PST_CACHE'			=> 'Dimeniune cache',
 	'PST_CACHE_EXPLAIN'	=> 'Subiectele similare memorate vor expira după acest timp, în secunde. Alegeţi 0 dacă doriţi să dezactivaţi memorarea subiectelor similare.',
+	'PST_SENSE'			=> 'Search sensitivity',
+	'PST_SENSE_EXPLAIN'	=> 'Set the search sensitivity to a value between 1 and 10. Use a lower number if you are not seeing any similar topics. Recommended settings: For “phpbb_topics” database tables using InnoDB use 1; for MyISAM use 5.',
 	'PST_LEGEND3'		=> 'Setări forum',
 	'PST_NOSHOW_LIST'	=> 'Nu afişa în',
 	'PST_NOSHOW_TITLE'	=> 'Nu afişa subiecte similare în',
@@ -67,9 +72,6 @@ $lang = array_merge($lang, array(
 	'PST_WORDS_EXPLAIN'	=> 'Adăugaţi cuvinte speciale unice care ar trebui ignorate atunci când sunt căutate subiecte similare. (Reţineţi: Cuvintele care sunt cunoscute ca frecvente în limba dumneavoastră sunt implicit ignorate.) Separaţi cuvintele între ele cu un spaţiu. Majusculele sunt nesemnificative. Maxim 255 de caractere.',
 	'PST_SAVED'			=> 'Setări actualizate',
 	'PST_FORUM_INFO'	=> '“Nu afişa în”: Nu va afişa subiectele similare în forumurile alese.<br />“Nu căuta în” : Nu va căuta subiecte similare în forumurile alese.',
-	'PST_NO_MYSQL'		=> 'MODificarea Subiecte similare nu va funcţiona pe forumul dumneavoastr. MODificarea Subiecte similare necesită o bază de date cu MySQL 4 sau MySQL 5.',
-	'PST_WARN_FULLTEXT'	=> 'MODificarea Subiecte similare nu va funcţiona pe forumul dumneavoastr. Subiecte similare utilizează indici FULLTEXT care necesită o bază de date MySQL 4 sau MySQL 5 și “phpbb_topics”, tabelul trebuie să fie setat la motorul de stocare MyISAM (sau InnoDB este, de asemenea, permisă atunci când este utilizat cu MySQL 5.6.4 sau mai nouă).<br /><br />Dacă doriți să utilizați Subiecte similare, se poate actualiza în siguranță a bazei de date pentru a sprijini indici text complet. Toate schimbarile vor fi revenit dacă vă decideți vreodată pentru a elimina Subiecte similare.',
-	'PST_ADD_FULLTEXT'	=> 'Da, activați suportul pentru indici FULLTEXT',
-	'PST_SAVE_FULLTEXT'	=> 'Baza de date a fost actualizat. Vă puteți bucura de acum, folosind Subiecte similare.',
-	'PST_ERR_FULLTEXT'	=> 'Your database could not be updated.',
+	'PST_NO_COMPAT'		=> 'MODificarea Subiecte similare nu va funcţiona pe forumul dumneavoastr. MODificarea Subiecte similare necesită o bază de date cu MySQL 4 sau MySQL 5 sau PostgreSQL.',
+	'PST_ERR_CONFIG'	=> 'Prea multe forumuri au fost marcate în lista de forumuri. Vă rugăm să încercați din nou, cu o selecție mai mic.',
 ));

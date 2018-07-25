@@ -1,12 +1,12 @@
 <?php
 /**
-*
-* Precise Similar Topics
-*
-* @copyright (c) 2014 Matt Friedman
-* @license GNU General Public License, version 2 (GPL-2.0)
-*
-*/
+ *
+ * Precise Similar Topics
+ *
+ * @copyright (c) 2014 Matt Friedman
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
 
 namespace vse\similartopics\tests\event;
 
@@ -15,28 +15,49 @@ class ucp_listener_test extends \phpbb_test_case
 	/** @var \vse\similartopics\event\listener */
 	protected $listener;
 
+	/** @var \phpbb\auth\auth|\PHPUnit_Framework_MockObject_MockObject */
+	protected $auth;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\language\language */
+	protected $language;
+
+	/** @var \phpbb\request\request|\PHPUnit_Framework_MockObject_MockObject */
+	protected $request;
+
+	/** @var \phpbb\template\template|\PHPUnit_Framework_MockObject_MockObject */
+	protected $template;
+
+	/** @var \phpbb\user|\PHPUnit_Framework_MockObject_MockObject */
+	protected $user;
+
 	/**
-	* Setup test environment
-	*
-	* @access public
-	*/
+	 * Setup test environment
+	 */
 	public function setUp()
 	{
 		parent::setUp();
 
+		global $phpbb_root_path, $phpEx;
+
 		// Load/Mock classes required by the event listener class
-		$this->auth = $this->getMock('\phpbb\auth\auth');
+		$this->auth = $this->getMockBuilder('\phpbb\auth\auth')->getMock();
 		$this->config = new \phpbb\config\config(array('similar_topics' => 1));
-		$this->request = $this->getMock('\phpbb\request\request');
-		$this->template = new \vse\similartopics\tests\mock\template();
-		$this->user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
+		$this->request = $this->getMockBuilder('\phpbb\request\request')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->template = $this->getMockBuilder('\phpbb\template\template')->getMock();
+		$this->language = new \phpbb\language\language(new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx));
+		$this->user = $this->getMockBuilder('\phpbb\user')
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 	/**
-	* Create our event listener
-	*
-	* @access protected
-	*/
+	 * Create our event listener
+	 */
 	protected function set_listener()
 	{
 		$this->listener = new \vse\similartopics\event\ucp_listener(
@@ -49,10 +70,8 @@ class ucp_listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Test the event listener is constructed correctly
-	*
-	* @access public
-	*/
+	 * Test the event listener is constructed correctly
+	 */
 	public function test_construct()
 	{
 		$this->set_listener();
@@ -60,10 +79,8 @@ class ucp_listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Test the event listener is subscribing events
-	*
-	* @access public
-	*/
+	 * Test the event listener is subscribing events
+	 */
 	public function test_getSubscribedEvents()
 	{
 		$this->assertEquals(array(
@@ -73,11 +90,10 @@ class ucp_listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Data set for test_ucp_prefs_set_data
-	*
-	* @return array Array of test data
-	* @access public
-	*/
+	 * Data set for test_ucp_prefs_set_data
+	 *
+	 * @return array Array of test data
+	 */
 	public function ucp_prefs_set_data_data()
 	{
 		return array(
@@ -116,11 +132,10 @@ class ucp_listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Test the ucp_prefs_set_data event
-	*
-	* @dataProvider ucp_prefs_set_data_data
-	* @access public
-	*/
+	 * Test the ucp_prefs_set_data event
+	 *
+	 * @dataProvider ucp_prefs_set_data_data
+	 */
 	public function test_ucp_prefs_set_data($data, $sql_ary, $expected)
 	{
 		$this->set_listener();
@@ -139,11 +154,10 @@ class ucp_listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Data set for test_ucp_prefs_set_data
-	*
-	* @return array Array of test data
-	* @access public
-	*/
+	 * Data set for test_ucp_prefs_set_data
+	 *
+	 * @return array Array of test data
+	 */
 	public function ucp_prefs_get_data_data()
 	{
 		return array(
@@ -260,11 +274,10 @@ class ucp_listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Test the ucp_prefs_get_data event
-	*
-	* @dataProvider ucp_prefs_get_data_data
-	* @access public
-	*/
+	 * Test the ucp_prefs_get_data event
+	 *
+	 * @dataProvider ucp_prefs_get_data_data
+	 */
 	public function test_ucp_prefs_get_data($similar_topics, $submit, $u_similar_topics, $data, $expected)
 	{
 		$this->auth->expects($this->any())
@@ -279,6 +292,16 @@ class ucp_listener_test extends \phpbb_test_case
 
 		$this->set_listener();
 
+		if (!$submit)
+		{
+			$this->template->expects($this->once())
+				->method('assign_vars')
+				->with(array(
+					'S_SIMILAR_TOPICS'			=> $u_similar_topics,
+					'S_DISPLAY_SIMILAR_TOPICS'	=> $similar_topics,
+				));
+		}
+
 		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
 		$dispatcher->addListener('core.ucp_prefs_view_data', array($this->listener, 'ucp_prefs_get_data'));
 
@@ -290,13 +313,5 @@ class ucp_listener_test extends \phpbb_test_case
 		$data = $data['data'];
 
 		$this->assertEquals($expected, $data);
-
-		if (!$submit)
-		{
-			$this->assertEquals(array(
-				'S_SIMILAR_TOPICS'			=> $u_similar_topics,
-				'S_DISPLAY_SIMILAR_TOPICS'	=> $similar_topics,
-			), $this->template->get_template_vars());
-		}
 	}
 }

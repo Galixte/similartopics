@@ -8,6 +8,9 @@
 *
 */
 
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -50,6 +53,8 @@ $lang = array_merge($lang, array(
 	'PST_DAYS'			=> 'Días',
 	'PST_CACHE'			=> 'Longitud de la caché de Hilos Parecidos',
 	'PST_CACHE_EXPLAIN'	=> 'La caché de hilos parecidos expirará después del tiempo indicado, en segundos. Ponlo a 0 si quieres deshabilitar la caché de hilos parecidos.',
+	'PST_SENSE'			=> 'Search sensitivity',
+	'PST_SENSE_EXPLAIN'	=> 'Set the search sensitivity to a value between 1 and 10. Use a lower number if you are not seeing any similar topics. Recommended settings: For “phpbb_topics” database tables using InnoDB use 1; for MyISAM use 5.',
 	'PST_LEGEND3'		=> 'Configuración de foro',
 	'PST_NOSHOW_LIST'	=> 'No mostrar en',
 	'PST_NOSHOW_TITLE'	=> 'No mostrar hilos parecidos en',
@@ -66,9 +71,6 @@ $lang = array_merge($lang, array(
 	'PST_WORDS_EXPLAIN'	=> 'Añadir palabras especiales exclusivas de su foro en el que deben ser ignoradas en hilos parecidos. (Nota: Las palabras comunes en su lengua son ignorados por defecto.) Separe cada palabra con un espacio. Mayúsculas no minúsculas. Un máximo de 255 caracteres.',
 	'PST_SAVED'			=> 'La configuración de Hilos Parecidos ha sido actualizada',
 	'PST_FORUM_INFO'	=> '“No Mostrar En”: Deshabilitará la visualización de hilos parecidos en el foro seleccionado.<br />“No Buscar En” : Ignorará los foros seleccionados cuando se estén buscando hilos parecidos.',
-	'PST_NO_MYSQL'		=> 'Hilos Parecidos no va a funcionar en tu foro. Hilos Parecidos requiere una base de datos MySQL 4 o MySQL 5.',
-	'PST_WARN_FULLTEXT'	=> 'Hilos Parecidos no va a funcionar en tu foro. Hilos Parecidos utiliza índices FULLTEXT que requieren una base de datos MySQL 4 o MySQL 5 y la tabla “phpbb_topics” se debe establecer en el motor de almacenamiento MyISAM (o InnoDB también se permite cuando se utiliza con MySQL 5.6.4 o posterior).<br /><br />Si desea utilizar Hilos Parecidos, que podemos actualizar con seguridad su base de datos para apoyar índices FULLTEXT. Cualquier cambio realizado se revertirán si alguna vez decide quitar Hilos Parecidos.',
-	'PST_ADD_FULLTEXT'	=> 'Sí, activar el soporte de índices FULLTEXT',
-	'PST_SAVE_FULLTEXT'	=> 'Su base de datos se ha actualizado. Ahora puede disfrutar con Hilos Parecidos.',
-	'PST_ERR_FULLTEXT'	=> 'Your database could not be updated.',
+	'PST_NO_COMPAT'		=> 'Hilos Parecidos no va a funcionar en tu foro. Hilos Parecidos requiere una base de datos MySQL 4 o MySQL 5 o PostgreSQL.',
+	'PST_ERR_CONFIG'	=> 'Demasiados foros fueron marcados en la lista de foros. Inténtalo de nuevo con una selección más pequeña.',
 ));

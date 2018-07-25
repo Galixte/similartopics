@@ -8,6 +8,9 @@
 *
 */
 
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -50,6 +53,8 @@ $lang = array_merge($lang, array(
 	'PST_DAYS'			=> 'Dana',
 	'PST_CACHE'			=> 'Dužina keša za Similar Topics',
 	'PST_CACHE_EXPLAIN'	=> 'Keširane slične teme će da nestanu nakon toliko vremena u sekunadma. Podesite vrednost na 0 ukoliko želite da isključite ovu opciju.',
+	'PST_SENSE'			=> 'Search sensitivity',
+	'PST_SENSE_EXPLAIN'	=> 'Set the search sensitivity to a value between 1 and 10. Use a lower number if you are not seeing any similar topics. Recommended settings: For “phpbb_topics” database tables using InnoDB use 1; for MyISAM use 5.',
 	'PST_LEGEND3'		=> 'Podešavanja foruma',
 	'PST_NOSHOW_LIST'	=> 'Ne prikazuj u',
 	'PST_NOSHOW_TITLE'	=> 'Ne prikazuj slične teme u',
@@ -66,9 +71,6 @@ $lang = array_merge($lang, array(
 	'PST_WORDS_EXPLAIN'	=> 'Dodajte specijalne reči koje su unikatne za vaš forum koje bi trebalo da budu ignorisane kada se pretražuju slične teme. (Napomena: reči koje se inače smatraju za ustaljene će ionako biti ignorisane prilikom pretrage.) Reči razdvojte razmakom. Case insensitive. Maksimalno 255 karaktera.',
 	'PST_SAVED'			=> 'Podešavanja za Similar Topics su ažurirana',
 	'PST_FORUM_INFO'	=> '"Ne prikazuj u": Neće prikazati slične teme u izabranim forumima.<br />"Ne pretražuj u": Neće pretraživati slične teme u izabranim forumima.',
-	'PST_NO_MYSQL'		=> 'Similar Topics ne funkcioniše sa vašim forumom. Similar Topics zahteva MySQL 4 ili MySQL 5 bazu podataka.',
-	'PST_WARN_FULLTEXT'	=> 'Similar Topics ne funkcioniše sa vašim forumom. Similar Topics koristi Ceo FULLTEXT indekse koji zahtevaju MySQL 4 ili MySQL 5 bazu podataka i “phpbb_topics” tabelu mora biti postavljena na motor MyISAM skladištenja ( ili InnoDB je takođe dozvoljeno kada se koristi sa MySQL 5.6.4 ili noviju )<br /><br />Ako želite da koristite Similar Topics, možemo bezbedno ažurirati bazu podataka za podršku Ceo tekst indekse. Sve promene su biti vraćene ako ikada odlučite da uklonite Similar Topics.',
-	'PST_ADD_FULLTEXT'	=> 'Da, omogućite podršku za Ceo FULLTEXT indeksa',
-	'PST_SAVE_FULLTEXT'	=> 'Vaša baza podataka je ažurirana . Sada možete uživati koristeći Similar Topics.',
-	'PST_ERR_FULLTEXT'	=> 'Your database could not be updated.',
+	'PST_NO_COMPAT'		=> 'Similar Topics ne funkcioniše sa vašim forumom. Similar Topics zahteva MySQL 4 ili MySQL 5 ili PostgreSQL bazu podataka.',
+	'PST_ERR_CONFIG'	=> 'Previše forumi su označeni na listi forumima . Pokušajte ponovo sa manjim izborom.',
 ));

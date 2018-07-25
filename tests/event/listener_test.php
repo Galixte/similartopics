@@ -1,12 +1,12 @@
 <?php
 /**
-*
-* Precise Similar Topics
-*
-* @copyright (c) 2014 Matt Friedman
-* @license GNU General Public License, version 2 (GPL-2.0)
-*
-*/
+ *
+ * Precise Similar Topics
+ *
+ * @copyright (c) 2014 Matt Friedman
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
 
 namespace vse\similartopics\tests\event;
 
@@ -15,42 +15,35 @@ class listener_test extends \phpbb_test_case
 	/** @var \vse\similartopics\event\listener */
 	protected $listener;
 
+	/** @var \vse\similartopics\core\similar_topics|\PHPUnit_Framework_MockObject_MockObject */
+	protected $similar_topics;
+
 	/**
-	* Setup test environment
-	*
-	* @access public
-	*/
+	 * Setup test environment
+	 */
 	public function setUp()
 	{
 		parent::setUp();
 
 		// Load/Mock classes required by the event listener class
-		$this->auth = $this->getMock('\phpbb\auth\auth');
-		$this->config = new \phpbb\config\config(array('similar_topics' => 1));
-		$this->user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
-		$this->similar_topics = new \vse\similartopics\tests\mock\similar_topics();
+		$this->similar_topics = $this->getMockBuilder('\vse\similartopics\core\similar_topics')
+			->disableOriginalConstructor()
+			->getMock();
 	}
 
 	/**
-	* Create our event listener
-	*
-	* @access protected
-	*/
+	 * Create our event listener
+	 */
 	protected function set_listener()
 	{
 		$this->listener = new \vse\similartopics\event\listener(
-			$this->auth,
-			$this->config,
-			$this->user,
 			$this->similar_topics
 		);
 	}
 
 	/**
-	* Test the event listener is constructed correctly
-	*
-	* @access public
-	*/
+	 * Test the event listener is constructed correctly
+	 */
 	public function test_construct()
 	{
 		$this->set_listener();
@@ -58,10 +51,8 @@ class listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Test the event listener is subscribing events
-	*
-	* @access public
-	*/
+	 * Test the event listener is subscribing events
+	 */
 	public function test_getSubscribedEvents()
 	{
 		$this->assertEquals(array(
@@ -71,11 +62,48 @@ class listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Data set for test_add_permissions
-	*
-	* @return array Array of test data
-	* @access public
-	*/
+	 * Data set for test_display_similar_topics
+	 *
+	 * @return array Array of test data
+	 */
+	public function display_similar_topics_data()
+	{
+		return array(
+			array(array('forum_id' => 1), true, true),
+			array(array('forum_id' => 2), false, false),
+		);
+	}
+
+	/**
+	 * Test display_similar_topics event is working as expected
+	 *
+	 * @dataProvider display_similar_topics_data
+	 */
+	public function test_display_similar_topics($topic_data, $is_available, $display)
+	{
+		$this->similar_topics->expects($this->any())
+			->method('is_available')
+			->will($this->returnValue($is_available));
+
+		$this->similar_topics->expects(($is_available) ? $this->once() : $this->never())
+			->method('display_similar_topics')
+			->with($topic_data);
+
+		$this->set_listener();
+
+		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
+		$dispatcher->addListener('core.viewtopic_modify_page_title', array($this->listener, 'display_similar_topics'));
+
+		$event_data = array('forum_id', 'topic_data');
+		$event = new \phpbb\event\data(compact($event_data));
+		$dispatcher->dispatch('core.viewtopic_modify_page_title', $event);
+	}
+
+	/**
+	 * Data set for test_add_permissions
+	 *
+	 * @return array Array of test data
+	 */
 	public function add_permissions_data()
 	{
 		return array(
@@ -110,11 +138,10 @@ class listener_test extends \phpbb_test_case
 	}
 
 	/**
-	* Test the add_permissions event
-	*
-	* @dataProvider add_permissions_data
-	* @access public
-	*/
+	 * Test the add_permissions event
+	 *
+	 * @dataProvider add_permissions_data
+	 */
 	public function test_add_permissions($permissions, $expected_contains)
 	{
 		$this->set_listener();

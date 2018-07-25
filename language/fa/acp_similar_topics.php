@@ -9,6 +9,9 @@
 *
 */
 
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -51,6 +54,8 @@ $lang = array_merge($lang, array(
 	'PST_DAYS'			=> 'روز',
 	'PST_CACHE'			=> 'زمان ذخیره سازی کش',
 	'PST_CACHE_EXPLAIN'	=> 'کش یا نهان این افزونه بعد از تعیین زمان توسط شما منسوخ خواهد شد ، برای غیر فعال سازی 0 را وارد کنید.',
+	'PST_SENSE'			=> 'Search sensitivity',
+	'PST_SENSE_EXPLAIN'	=> 'Set the search sensitivity to a value between 1 and 10. Use a lower number if you are not seeing any similar topics. Recommended settings: For “phpbb_topics” database tables using InnoDB use 1; for MyISAM use 5.',
 	'PST_LEGEND3'		=> 'تنظیمات انجمن',
 	'PST_NOSHOW_LIST'	=> 'در این بخش نمایش نده',
 	'PST_NOSHOW_TITLE'	=> 'موضوعات مشابه را در این انجمن نشان نده',
@@ -67,9 +72,6 @@ $lang = array_merge($lang, array(
 	'PST_WORDS_EXPLAIN'	=> 'کلمات سانسوی که قصد دارید هنگام جستجوی موضوعات مشابه نمایش داده نشوند را وارد کنید. هر کلمه را با space میتوانید جدا کنید و ماکزمیم کاراکتر کلمات نیز 255 میباشد.',
 	'PST_SAVED'			=> 'تنظیمات موضوعات مشابه به روز رسانی شد',
 	'PST_FORUM_INFO'	=> 'انتخاب گزنیه"در این بخش نمایش نده" باعث می شود موضوعات مشابه در انجمن های انتخابی نمایش داده نشود<br />انتخاب گزینه" جستجوی موضوعات را در این بخش انجام نده" باعث می شود ، جستجو در بخش های انتخابی برای تاپیک های مشابه انجام نشود.',
-	'PST_NO_MYSQL'		=> 'افزونه موضوعات مشابه با سیستم انجمن شما سازگار نیست. این سیستم تنها روی دیتابیس های MySQL 4 or MySQL 5 کار میکند',
-	'PST_WARN_FULLTEXT'	=> 'افزونه موضوعات مشابه با سیستم انجمن شما سازگار نیست. افزونه موضوعات مشابه تنها با FULLTEXT و جدول “phpbb_topics” سازگار میباشد ',
-	'PST_ADD_FULLTEXT'	=> 'بله ،فعال سازی برای FULLTEXT انجام شد',
-	'PST_SAVE_FULLTEXT'	=> 'دیتابیس شما با موفقیت به روز رسانی شد. حالا میتوانید به راحتی از این افزونه لذت ببرید',
-	'PST_ERR_FULLTEXT'	=> 'Your database could not be updated.',
+	'PST_NO_COMPAT'		=> 'افزونه موضوعات مشابه با سیستم انجمن شما سازگار نیست. این سیستم تنها روی دیتابیس های PostgreSQL or MySQL 4 or MySQL 5 کار میکند',
+	'PST_ERR_CONFIG'	=> 'بیش از حد بسیاری از انجمن ها در فهرست انجمن ها مشخص شد. لطفا دوباره با یک انتخاب کوچکتر امتحان کنید.',
 ));

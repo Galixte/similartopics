@@ -8,6 +8,9 @@
 *
 */
 
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -50,6 +53,8 @@ $lang = array_merge($lang, array(
 	'PST_DAYS'			=> 'Dagen',
 	'PST_CACHE'			=> 'Cache lengte vergelijkbare onderwerpen',
 	'PST_CACHE_EXPLAIN'	=> 'Cache vergelijkbare onderwerpen verloopt na deze tijd in seconden. Stel in op 0 als u dit wilt uitschakelen.',
+	'PST_SENSE'			=> 'Search sensitivity',
+	'PST_SENSE_EXPLAIN'	=> 'Set the search sensitivity to a value between 1 and 10. Use a lower number if you are not seeing any similar topics. Recommended settings: For “phpbb_topics” database tables using InnoDB use 1; for MyISAM use 5.',
 	'PST_LEGEND3'		=> 'Forum instellingen',
 	'PST_NOSHOW_LIST'	=> 'Niet weergeven in',
 	'PST_NOSHOW_TITLE'	=> 'Vergelijkbare Onderwerpen Niet weergeven in',
@@ -66,9 +71,6 @@ $lang = array_merge($lang, array(
 	'PST_WORDS_EXPLAIN'	=> 'Voeg Speciale woorden toe welke uniek zijn aan uw forum dat moet worden genegeerd bij het vinden van vergelijkbare onderwerpen. (Note: Woorden die momenteel worden beschouwd als gemeenschappelijk in uw taal worden reeds standaard genegeerd.) Scheid elk woord met een spatie. Hoofdlettergevoelig. Max. 255 karakters.',
 	'PST_SAVED'			=> 'Vergelijkbare onderwerpen instellingen bijgewerkt',
 	'PST_FORUM_INFO'	=> '“Niet weergeven in”: Soortgelijke onderwerpen worden niet weergegeven in de geselecteerde forums.<br />“Niet zoeken in” : Zal niet zoeken in de geselecteerde forums voor vergelijkbare onderwerpen.',
-	'PST_NO_MYSQL'		=> 'Vergelijkbare onderwerpen zal niet werken op uw forum. Vergelijkbare onderwerpen vereist een MySQL 4 of 5 MySQL database.',
-	'PST_WARN_FULLTEXT'	=> 'Vergelijkbare onderwerpen zal niet werken op uw forum. Vergelijkbare onderwerpen gebruikt FULLTEXT indexen die een MySQL 4 of MySQL 5 database en de “phpbb_topics” tabel nodig hebben, moet worden ingesteld op de MyISAM storage engine (of InnoDB is ook toegestaan ​​in combinatie met MySQL 5.6.4 of nieuwer).<br /><br />Als je wilt Vergelijkbare onderwerpen gebruiken, kunnen we gerust uw database te updaten naar FULLTEXT indexen ondersteunen. Eventuele wijzigingen zullen worden teruggedraaid als je ooit besluit om Vergelijkbare onderwerpen te verwijderen.',
-	'PST_ADD_FULLTEXT'	=> 'Ja, in staat ondersteuning voor FULLTEXT indexen',
-	'PST_SAVE_FULLTEXT'	=> 'De database is bijgewerkt. U kunt nu genieten van het gebruik Vergelijkbare onderwerpen.',
-	'PST_ERR_FULLTEXT'	=> 'Your database could not be updated.',
+	'PST_NO_COMPAT'		=> 'Vergelijkbare onderwerpen zal niet werken op uw forum. Vergelijkbare onderwerpen vereist een PostgreSQL, MySQL 4 of 5 MySQL database.',
+	'PST_ERR_CONFIG'	=> 'Te veel fora werden gemarkeerd in de lijst van forums. Probeer het opnieuw met een kleinere selectie.',
 ));

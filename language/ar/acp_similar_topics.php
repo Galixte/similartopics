@@ -6,9 +6,12 @@
 * @copyright (c) 2013 Matt Friedman
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
-* Translated By : Basil Taha Alhitary - www.alhitary.net
+* Translated By : Bassel Taha Alhitary - www.alhitary.net
 */
 
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -51,6 +54,8 @@ $lang = array_merge($lang, array(
 	'PST_DAYS'			=> 'أيام',
 	'PST_CACHE'			=> 'فترة الملفات المؤقتة',
 	'PST_CACHE_EXPLAIN'	=> 'سيتم حذف الملفات المؤقتة للمواضيع المُتشابهه بعد تحديد الفترة هنا بالثواني. الصفر يعني تعطيل هذا الخيار.',
+	'PST_SENSE'			=> 'Search sensitivity',
+	'PST_SENSE_EXPLAIN'	=> 'Set the search sensitivity to a value between 1 and 10. Use a lower number if you are not seeing any similar topics. Recommended settings: For “phpbb_topics” database tables using InnoDB use 1; for MyISAM use 5.',
 	'PST_LEGEND3'		=> 'إعدادات المنتدى',
 	'PST_NOSHOW_LIST'	=> 'لا تعرض في',
 	'PST_NOSHOW_TITLE'	=> 'لا تعرض المواضيع المُتشابهه في',
@@ -67,9 +72,6 @@ $lang = array_merge($lang, array(
 	'PST_WORDS_EXPLAIN'	=> 'سيتم استبعاد الكلمات التي ستضيفها هنا عند البحث عن المواضيع المُتشابهة. ( ملاحظة : يتم استبعاد الكلمات التي تعتبر شائعة في لغتك بصورة افتراضية ). اعمل مسافة بين كل كلمة وأخرى. هذا الخيار غير دقيق لتطابق الكلمات. الحد الأقصى هو 255 حرف.',
 	'PST_SAVED'			=> 'تم تحديث إعدادات المواضيع المُتشابهه',
 	'PST_FORUM_INFO'	=> '" لا تعرض في " : يعني عدم اظهار المواضيع المُتشابهه في المنتديات المُحددة.<br />" لا تبحث في " : يعني عدم البحث عن المواضيع المُتشابهه في المنتديات المُحددة.',
-	'PST_NO_MYSQL'		=> 'إضافة "المواضيع المُتشابهه" لا تتوافق مع منتداك. فهي تعمل فقط على قاعدة البيانات MySQL 4 أو MySQL 5.',
-	'PST_WARN_FULLTEXT'	=> 'إضافة "المواضيع المُتشابهه" لا تتوافق مع منتداك. فهي تستخدم فهرسة النص الكامل FULLTEXT والذي يتطلب توفر قاعدة البيانات MySQL 4 أو MySQL 5 لديك , وأيضاً ضبط الجدول “phpbb_topics” إلى أداة التخزين MyISAM ( أو الـ InnoDB مسموح أيضاً عند استخدامها مع MySQL 5.6.4 أو اصدار أحدث منه ).<br /><br />عليك تحديث قاعدة البيانات لديك بطريقة آمنة لكي تعمل إضافة "المواضيع المُتشابهه". وسيتم حذف التغييرات الجديدة في حالة حذف هذه الإضافة.',
-	'PST_ADD_FULLTEXT'	=> 'نعم, تفعيل الدعم لفهرسة النص الكامل FULLTEXT',
-	'PST_SAVE_FULLTEXT'	=> 'تم تحديث قاعدة البيانات لديك. تستطيع استخدام المواضيع المُتشابهه الآن.',
-	'PST_ERR_FULLTEXT'	=> 'لم يتم تحديث قاعدة البيانات لديك.',
+	'PST_NO_COMPAT'		=> 'إضافة "المواضيع المُتشابهه" لا تتوافق مع منتداك. فهي تعمل فقط على قاعدة البيانات MySQL 4 أو MySQL 5 أو PostgreSQL.',
+	'PST_ERR_CONFIG'	=> 'أيضا تميزت العديد من المنتديات في قائمة من المنتديات. يرجى المحاولة مرة أخرى مع مجموعة أصغر.',
 ));
