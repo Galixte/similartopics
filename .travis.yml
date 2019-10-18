@@ -1,6 +1,5 @@
 language: php
-sudo: required
-dist: precise
+dist: trusty
 
 matrix:
   include:

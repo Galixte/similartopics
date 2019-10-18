@@ -148,9 +148,8 @@ class ucp_listener_test extends \phpbb_test_case
 		$dispatcher->dispatch('core.ucp_prefs_view_update_data', $event);
 
 		$event_data_after = $event->get_data_filtered($event_data);
-		$sql_ary = $event_data_after['sql_ary'];
 
-		$this->assertEquals($expected, $sql_ary);
+		$this->assertEquals($expected, $event_data_after['sql_ary']);
 	}
 
 	/**
@@ -283,12 +282,12 @@ class ucp_listener_test extends \phpbb_test_case
 		$this->auth->expects($this->any())
 			->method('acl_get')
 			->with($this->stringContains('u_similar_topics'), $this->anything())
-			->will($this->returnValue($u_similar_topics));
+			->willReturn($u_similar_topics);
 
 		$this->user->data['user_similar_topics'] = 0;
-		$this->request->expects($this->any())
+		$this->request->expects($this->once())
 			->method('variable')
-			->will($this->returnValue($similar_topics));
+			->willReturn($similar_topics);
 
 		$this->set_listener();
 
@@ -310,8 +309,7 @@ class ucp_listener_test extends \phpbb_test_case
 		$dispatcher->dispatch('core.ucp_prefs_view_data', $event);
 
 		$data = $event->get_data_filtered($event_data);
-		$data = $data['data'];
 
-		$this->assertEquals($expected, $data);
+		$this->assertEquals($expected, $data['data']);
 	}
 }

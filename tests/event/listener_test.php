@@ -81,11 +81,11 @@ class listener_test extends \phpbb_test_case
 	 */
 	public function test_display_similar_topics($topic_data, $is_available, $display)
 	{
-		$this->similar_topics->expects($this->any())
+		$this->similar_topics->expects($this->once())
 			->method('is_available')
-			->will($this->returnValue($is_available));
+			->willReturn($is_available);
 
-		$this->similar_topics->expects(($is_available) ? $this->once() : $this->never())
+		$this->similar_topics->expects($is_available ? $this->once() : $this->never())
 			->method('display_similar_topics')
 			->with($topic_data);
 
@@ -153,12 +153,11 @@ class listener_test extends \phpbb_test_case
 		$event = new \phpbb\event\data(compact($event_data));
 		$dispatcher->dispatch('core.permissions', $event);
 
-		$permissions = $event->get_data_filtered($event_data);
-		$permissions = $permissions['permissions'];
+		$data = $event->get_data_filtered($event_data);
 
 		foreach ($expected_contains as $expected)
 		{
-			$this->assertContains($expected, $permissions);
+			$this->assertContains($expected, $data['permissions']);
 		}
 	}
 }
